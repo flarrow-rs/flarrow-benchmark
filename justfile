@@ -36,12 +36,12 @@ draw:
 bench:
     just static
     just dyn
-    # just static-dyn
-    # just dyn-static
-    # just raw-static
-    # just raw-dyn
-    # just raw-static-dyn
-    # just raw-dyn-static
-    # just raw-static-dyn
-    # just raw-dyn-static
+    just static-dyn
+    just dyn-static
+    just raw-static
+    just raw-dyn
+    just raw-static-dyn
+    just raw-dyn-static
+    just raw-static-dyn
+    just raw-dyn-static
     just draw

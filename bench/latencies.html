@@ -6,12 +6,12 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
 </head>
 <body>
-    <div id="fbbdd8acbb31488c900d687e22fcaa8e" class="chart-container" style="width: 800px">
-        <svg id="chart_fbbdd8acbb31488c900d687e22fcaa8e"></svg>
+    <div id="d5e26c0237594eef89ca5bedda5c3f31" class="chart-container" style="width: 800px">
+        <svg id="chart_d5e26c0237594eef89ca5bedda5c3f31"></svg>
     </div>
     <script>
-        const svg_fbbdd8acbb31488c900d687e22fcaa8e = document.querySelector('#chart_fbbdd8acbb31488c900d687e22fcaa8e')
-        const chart_fbbdd8acbb31488c900d687e22fcaa8e = new chartXkcd.Line(svg_fbbdd8acbb31488c900d687e22fcaa8e, {"title": "Latencies", "data": {"datasets": [{"label": "raw dyn-static", "data": [64, 85, 84, 90, 97, 102, 161, 73, 74, 144, 123, 82]}, {"label": "wrapped static-dyn", "data": [111, 115, 98, 105, 293, 97, 117, 131, 97, 165, 85, 95]}, {"label": "wrapped static-static", "data": [24, 25, 26, 28, 26, 25, 25, 26, 27, 36, 23, 24]}, {"label": "raw static-dyn", "data": [98, 119, 87, 88, 115, 92, 90, 118, 125, 137, 75, 78]}, {"label": "raw static-static", "data": [17, 26, 22, 25, 24, 31, 22, 23, 24, 30, 18, 19]}, {"label": "wrapped dyn-dyn", "data": [99, 115, 96, 90, 179, 128, 96, 130, 136, 190, 101, 96]}, {"label": "wrapped dyn-static", "data": [130, 96, 90, 126, 95, 153, 84, 143, 75, 95, 75, 80]}, {"label": "raw dyn-dyn", "data": [71, 84, 98, 97, 83, 84, 96, 103, 128, 160, 63, 72]}], "labels": [1, 8, 64, 512, 2048, 4096, 16384, 40960, 409600, 4096000, 40960000, 409600000]}, "xLabel": "Size of the Payload", "yLabel": "Latency (\u00b5s)", "options": {"yTickCount": 3, "legendPosition": 1}});
+        const svg_d5e26c0237594eef89ca5bedda5c3f31 = document.querySelector('#chart_d5e26c0237594eef89ca5bedda5c3f31')
+        const chart_d5e26c0237594eef89ca5bedda5c3f31 = new chartXkcd.Line(svg_d5e26c0237594eef89ca5bedda5c3f31, {"title": "Latencies", "data": {"datasets": [{"label": "raw dyn-static", "data": [118, 125, 116, 125, 119, 118, 123, 121, 116, 130]}, {"label": "wrapped static-dyn", "data": [162, 165, 160, 162, 153, 156, 156, 158, 156, 163]}, {"label": "wrapped static-static", "data": [38, 42, 42, 40, 39, 42, 39, 38, 40, 42]}, {"label": "raw static-dyn", "data": [143, 149, 139, 119, 119, 120, 121, 124, 114, 126]}, {"label": "raw static-static", "data": [27, 30, 29, 28, 30, 31, 28, 29, 31, 35]}, {"label": "wrapped dyn-dyn", "data": [185, 181, 180, 187, 204, 195, 214, 197, 200, 177]}, {"label": "wrapped dyn-static", "data": [195, 204, 196, 206, 203, 201, 195, 197, 192, 182]}, {"label": "raw dyn-dyn", "data": [161, 160, 132, 140, 139, 123, 114, 119, 120, 127]}], "labels": [1, 8, 64, 512, 2048, 4096, 16384, 40960, 409600, 4096000]}, "xLabel": "Size of the Payload", "yLabel": "Latency (\u00b5s)", "options": {"yTickCount": 3, "legendPosition": 1}});
     </script>
 </body>
 </html>
