@@ -20,7 +20,7 @@ raw-static:
 raw-dyn:
     cargo build --release -p sink --features "raw"
     cargo build --release -p source --features "raw"
-    cargo run --release --bin dyn
+    cargo run --release --bin dyn --features "raw"
 
 raw-static-dyn:
     cargo build --release -p sink --features "raw"
@@ -29,3 +29,19 @@ raw-static-dyn:
 raw-dyn-static:
     cargo build --release -p source --features "raw"
     cargo run --release --bin dyn_static --features "sink-no-dylib, raw"
+
+draw:
+    uv --directory draw run draw
+
+bench:
+    just static
+    just dyn
+    just static-dyn
+    just dyn-static
+    just raw-static
+    just raw-dyn
+    just raw-static-dyn
+    just raw-dyn-static
+    just raw-static-dyn
+    just raw-dyn-static
+    just draw

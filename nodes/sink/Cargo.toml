@@ -14,3 +14,4 @@ crate-type = ["cdylib", "rlib"]
 uhlc = { version = "0.8", features = ["std"] }
 flarrow-api = { workspace = true }
 message = { workspace = true }
+csv = "1.3"

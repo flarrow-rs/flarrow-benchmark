@@ -32,13 +32,29 @@ async fn main() -> Result<()> {
     .await?;
 
     let runtime = DataflowRuntime::new(flows, None, async move |loader: &mut Loader| {
+        #[cfg(not(feature = "raw"))]
+        let sink_cfg: serde_yml::Value = serde_yml::from_str(
+            r#"
+prefix: ""
+suffix: "static-static"
+"#,
+        )?;
+
+        #[cfg(feature = "raw")]
+        let sink_cfg: serde_yml::Value = serde_yml::from_str(
+            r#"
+prefix: "raw"
+suffix: "static-static"
+"#,
+        )?;
+
         loader
             .load_statically_linked::<BenchmarkSource>(source, serde_yml::from_str("")?)
             .await
             .wrap_err("Failed to load BenchmarkSource")?;
 
         loader
-            .load_statically_linked::<BenchmarkSink>(sink, serde_yml::from_str("")?)
+            .load_statically_linked::<BenchmarkSink>(sink, sink_cfg)
             .await
             .wrap_err("Failed to load BenchmarkSink")?;
 
