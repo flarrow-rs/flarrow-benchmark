@@ -1,0 +1,28 @@
+[workspace]
+resolver = "3"
+members = ["message", "nodes/sink", "nodes/source"]
+
+[workspace.dependencies]
+flarrow-api = "0.2"
+flarrow-runtime = "0.2"
+flarrow-message = "0.2"
+message = { path = "message" }
+
+[package]
+name = "flarrow-benchmark"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+flarrow-runtime = { workspace = true }
+
+sink = { path = "nodes/sink" }
+source = { path = "nodes/source" }
+
+url = "2"
+
+[features]
+sink-no-dylib = ["sink/no-dylib"]
+source-no-dylib = ["source/no-dylib"]
+
+no-dylib = ["sink-no-dylib", "source-no-dylib"]

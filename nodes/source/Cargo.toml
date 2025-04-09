@@ -1,0 +1,15 @@
+[package]
+name = "source"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+no-dylib = []
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+rand = "0.9"
+flarrow-api = { workspace = true }
+message = { workspace = true }
