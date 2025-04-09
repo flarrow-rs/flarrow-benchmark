@@ -4,13 +4,13 @@ requires-python = ">=3.13"
 
 [[package]]
 name = "cutecharts"
-version = "1.2.0"
+version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0e/e9/2269dc5450fca39d7dfacdf04faca176c4669eab9f2d9453d93405aaf070/cutecharts-1.2.0-py3-none-any.whl", hash = "sha256:5b0a04305cf53ce0276c01a90520bb0e4c0ab7270eda8dfd73193978e5f4cffa", size = 17232 },
+    { url = "https://files.pythonhosted.org/packages/02/78/3043496653e80008d10d5404bf96a4e70db50d547a17c4ef3313b892e39f/cutecharts-1.0.0-py3-none-any.whl", hash = "sha256:fcaf23194b75b8a6b332d0bcb70d4edbcd180d0dc6fd4d6f35f45b4ca63cd190", size = 16058 },
 ]
 
 [[package]]
@@ -24,7 +24,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cutecharts", specifier = ">=1.2.0" },
+    { name = "cutecharts", specifier = "==1.0.0" },
     { name = "pandas", specifier = ">=2.2.3" },
 ]
 

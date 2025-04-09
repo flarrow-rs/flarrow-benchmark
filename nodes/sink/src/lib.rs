@@ -197,7 +197,7 @@ impl Node for BenchmarkSink {
                 wtr.write_record(&[
                     size.to_string(),
                     latency.to_string(),
-                    throughput.to_string(),
+                    format!("{:.0}", throughput),
                 ])?;
             }
         }

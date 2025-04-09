@@ -1,1 +1,34 @@
-# flarrow-benchmark
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
+</head>
+<body>
+    <div id="fbbdd8acbb31488c900d687e22fcaa8e" class="chart-container" style="width: 800px">
+        <svg id="chart_fbbdd8acbb31488c900d687e22fcaa8e"></svg>
+    </div>
+    <script>
+        const svg_fbbdd8acbb31488c900d687e22fcaa8e = document.querySelector('#chart_fbbdd8acbb31488c900d687e22fcaa8e')
+        const chart_fbbdd8acbb31488c900d687e22fcaa8e = new chartXkcd.Line(svg_fbbdd8acbb31488c900d687e22fcaa8e, {"title": "Latencies", "data": {"datasets": [{"label": "raw dyn-static", "data": [64, 85, 84, 90, 97, 102, 161, 73, 74, 144, 123, 82]}, {"label": "wrapped static-dyn", "data": [111, 115, 98, 105, 293, 97, 117, 131, 97, 165, 85, 95]}, {"label": "wrapped static-static", "data": [24, 25, 26, 28, 26, 25, 25, 26, 27, 36, 23, 24]}, {"label": "raw static-dyn", "data": [98, 119, 87, 88, 115, 92, 90, 118, 125, 137, 75, 78]}, {"label": "raw static-static", "data": [17, 26, 22, 25, 24, 31, 22, 23, 24, 30, 18, 19]}, {"label": "wrapped dyn-dyn", "data": [99, 115, 96, 90, 179, 128, 96, 130, 136, 190, 101, 96]}, {"label": "wrapped dyn-static", "data": [130, 96, 90, 126, 95, 153, 84, 143, 75, 95, 75, 80]}, {"label": "raw dyn-dyn", "data": [71, 84, 98, 97, 83, 84, 96, 103, 128, 160, 63, 72]}], "labels": [1, 8, 64, 512, 2048, 4096, 16384, 40960, 409600, 4096000, 40960000, 409600000]}, "xLabel": "Size of the Payload", "yLabel": "Latency (\u00b5s)", "options": {"yTickCount": 3, "legendPosition": 1}});
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
+</head>
+<body>
+    <div id="20e13bb7b95a44319ce262d6eb1e471f" class="chart-container" style="width: 800px">
+        <svg id="chart_20e13bb7b95a44319ce262d6eb1e471f"></svg>
+    </div>
+    <script>
+        const svg_20e13bb7b95a44319ce262d6eb1e471f = document.querySelector('#chart_20e13bb7b95a44319ce262d6eb1e471f')
+        const chart_20e13bb7b95a44319ce262d6eb1e471f = new chartXkcd.Line(svg_20e13bb7b95a44319ce262d6eb1e471f, {"title": "Throughputs", "data": {"datasets": [{"label": "raw dyn-static", "data": [191417, 238629, 328407, 349211, 350926, 318167, 315378, 255676, 4334, 202, 17, 5]}, {"label": "wrapped static-dyn", "data": [138473, 112918, 119116, 40196, 117360, 117941, 71376, 105903, 1403, 93, 17, 5]}, {"label": "wrapped static-static", "data": [293393, 350926, 325415, 363399, 337678, 316776, 331433, 318188, 229453, 299527, 215, 27]}, {"label": "raw static-dyn", "data": [227262, 302060, 347512, 295823, 299527, 340901, 372856, 275346, 3751, 193, 17, 5]}, {"label": "raw static-static", "data": [431258, 582004, 617132, 550661, 493730, 483699, 500651, 550721, 426112, 518780, 246, 27]}, {"label": "wrapped dyn-dyn", "data": [72313, 49784, 108305, 56817, 84321, 56998, 35041, 93826, 877, 102, 17, 5]}, {"label": "wrapped dyn-static", "data": [71589, 16533, 151994, 52141, 87411, 38283, 187406, 189394, 1056, 97, 17, 5]}, {"label": "raw dyn-dyn", "data": [219606, 307257, 309924, 321027, 287505, 299545, 316776, 248571, 3214, 89, 17, 5]}], "labels": [1, 8, 64, 512, 2048, 4096, 16384, 40960, 409600, 4096000, 40960000, 409600000]}, "xLabel": "Size of the Payload", "yLabel": "Throughput frequency (s\u207b\u00b9)", "options": {"yTickCount": 3, "legendPosition": 1}});
+    </script>
+</body>
+</html>

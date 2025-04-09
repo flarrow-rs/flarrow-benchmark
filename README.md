@@ -1,18 +1,3 @@
-# flarrow-benchmark
+# [flarrow-rs](https://flarrow-rs.github.io/flarrow-benchmark/)
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
-</head>
-<body>
-    <div id="add60a0628d54034b81bf45ff3c00426" class="chart-container" style="width: 800px">
-        <svg id="chart_add60a0628d54034b81bf45ff3c00426"></svg>
-    </div>
-    <script>
-        const svg_add60a0628d54034b81bf45ff3c00426 = document.querySelector('#chart_add60a0628d54034b81bf45ff3c00426')
-        const chart_add60a0628d54034b81bf45ff3c00426 = new chartXkcd.Line(svg_add60a0628d54034b81bf45ff3c00426, {"title": "Latencies", "data": {"datasets": [{"label": "raw dyn-static", "data": [104, 88, 76, 83, 84, 118, 105, 102, 108, 114]}, {"label": "wrapped static-dyn", "data": [125, 124, 119, 114, 118, 125, 123, 118, 120, 125]}, {"label": "wrapped static-static", "data": [31, 30, 32, 23, 25, 19, 23, 17, 29, 33]}, {"label": "raw static-dyn", "data": [73, 81, 78, 79, 76, 89, 92, 114, 96, 92]}, {"label": "raw static-static", "data": [18, 26, 22, 21, 24, 22, 24, 22, 26, 24]}, {"label": "wrapped dyn-dyn", "data": [107, 134, 132, 128, 136, 106, 119, 121, 114, 129]}, {"label": "wrapped dyn-static", "data": [95, 145, 125, 130, 116, 127, 132, 124, 125, 118]}, {"label": "raw dyn-dyn", "data": [89, 141, 109, 140, 87, 109, 133, 114, 103, 96]}], "labels": [1, 8, 64, 512, 2048, 4096, 16384, 40960, 409600, 4096000]}, "xLabel": "Size of the Payload", "yLabel": "Latency (\u00b5s)", "options": {"yTickCount": 3, "legendPosition": 2}});
-    </script>
-</body>
-</html>
+The results are uploaded in the GitHub pages [here](https://flarrow-rs.github.io/flarrow-benchmark/)

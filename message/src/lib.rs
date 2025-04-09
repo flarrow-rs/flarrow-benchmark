@@ -15,7 +15,7 @@ pub struct Image {
     pub metadata: Option<Metadata>,
 }
 
-pub const SIZES: [usize; 10] = [
+pub const SIZES: [usize; 12] = [
     1,
     8,
     64,
@@ -26,6 +26,8 @@ pub const SIZES: [usize; 10] = [
     10 * 4096,
     100 * 4096,
     1000 * 4096,
+    10000 * 4096,
+    100000 * 4096,
 ];
 
-pub const BENCH_LEN: usize = 20;
+pub const BENCH_LEN: usize = 100;

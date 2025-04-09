@@ -3,14 +3,9 @@ name = "draw"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Enzo Le Van", email = "dev@enzo-le-van.fr" }
-]
+authors = [{ name = "Enzo Le Van", email = "dev@enzo-le-van.fr" }]
 requires-python = ">=3.13"
-dependencies = [
-    "cutecharts>=1.2.0",
-    "pandas>=2.2.3",
-]
+dependencies = ["cutecharts==1.0.0", "pandas>=2.2.3"]
 
 [project.scripts]
 draw = "draw:main"
