@@ -26,3 +26,4 @@ sink-no-dylib = ["sink/no-dylib"]
 source-no-dylib = ["source/no-dylib"]
 
 no-dylib = ["sink-no-dylib", "source-no-dylib"]
+raw = ["sink/raw", "source/raw"]

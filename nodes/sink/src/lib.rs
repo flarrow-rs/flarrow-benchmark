@@ -1,13 +1,26 @@
 use flarrow_api::prelude::*;
 
+#[cfg(feature = "raw")]
+use arrow_array::UInt8Array;
+
+#[cfg(not(feature = "raw"))]
 use message::Image;
+use message::{BENCH_LEN, SIZES};
+
 use std::time::Duration;
 use tokio::time::Instant;
 
 #[derive(Node)]
 pub struct BenchmarkSink {
+    #[cfg(not(feature = "raw"))]
     pub latency: Input<Image>,
+    #[cfg(feature = "raw")]
+    pub latency: Input<UInt8Array>,
+
+    #[cfg(not(feature = "raw"))]
     pub throughput: Input<Image>,
+    #[cfg(feature = "raw")]
+    pub throughput: Input<UInt8Array>,
 }
 
 #[node(runtime = "default_runtime")]
@@ -37,8 +50,11 @@ impl Node for BenchmarkSink {
         let mut counter = 0;
 
         println!("Latency: ");
-        while let Ok((header, image)) = self.latency.recv_async().await {
-            let data_len = image.data.len();
+        while let Ok((header, data)) = self.latency.recv_async().await {
+            #[cfg(feature = "raw")]
+            let data_len = data.len();
+            #[cfg(not(feature = "raw"))]
+            let data_len = data.data.len();
 
             if data_len != current_size {
                 if n > 0 {
@@ -62,7 +78,7 @@ impl Node for BenchmarkSink {
 
             counter += 1;
 
-            if counter >= 10 * 20 {
+            if counter >= SIZES.len() * BENCH_LEN {
                 break;
             }
         }
@@ -76,8 +92,12 @@ impl Node for BenchmarkSink {
         let mut latencies = Vec::new();
 
         println!("Throughput: ");
-        while let Ok((header, image)) = self.throughput.recv_async().await {
-            let data_len = image.data.len();
+        while let Ok((header, data)) = self.throughput.recv_async().await {
+            #[cfg(feature = "raw")]
+            let data_len = data.len();
+            #[cfg(not(feature = "raw"))]
+            let data_len = data.data.len();
+
             if data_len != current_size {
                 if n > 0 {
                     record_results(start, current_size, n, latencies, false);
@@ -100,7 +120,7 @@ impl Node for BenchmarkSink {
 
             counter += 1;
 
-            if counter >= 10 * 20 {
+            if counter >= SIZES.len() * BENCH_LEN {
                 break;
             }
         }

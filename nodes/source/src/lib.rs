@@ -1,28 +1,28 @@
 use std::{collections::HashMap, time::Duration};
 
 use arrow_array::UInt8Array;
+
+#[cfg(not(feature = "raw"))]
+use message::Image;
+
 use flarrow_api::prelude::*;
 
-use message::Image;
+use message::{BENCH_LEN, SIZES};
 use rand::{Rng, distr::StandardUniform};
-
-const SIZES: [usize; 10] = [
-    1,
-    8,
-    64,
-    512,
-    2048,
-    4096,
-    4 * 4096,
-    10 * 4096,
-    100 * 4096,
-    1000 * 4096,
-];
 
 #[derive(Node)]
 pub struct BenchmarkSource {
+    #[cfg(not(feature = "raw"))]
     pub latency: Output<Image>,
+    #[cfg(feature = "raw")]
+    pub latency: Output<UInt8Array>,
+
+    #[cfg(not(feature = "raw"))]
     pub throughput: Output<Image>,
+    #[cfg(feature = "raw")]
+    pub throughput: Output<UInt8Array>,
+
+    pub data: HashMap<usize, Vec<u8>>,
 }
 
 #[node(runtime = "default_runtime")]
@@ -31,19 +31,6 @@ impl Node for BenchmarkSource {
     where
         Self: Sized,
     {
-        Ok(Box::new(Self {
-            latency: outputs
-                .with("latency")
-                .await
-                .wrap_err("Failed to create latency output")?,
-            throughput: outputs
-                .with("throughput")
-                .await
-                .wrap_err("Failed to create throughput output")?,
-        }) as Box<dyn Node>)
-    }
-
-    async fn start(self: Box<Self>) -> Result<()> {
         let mut data = HashMap::new();
         for size in SIZES {
             let vec: Vec<u8> = rand::rng()
@@ -54,20 +41,42 @@ impl Node for BenchmarkSource {
             data.insert(size, vec);
         }
 
+        Ok(Box::new(Self {
+            latency: outputs
+                .with("latency")
+                .await
+                .wrap_err("Failed to create latency output")?,
+            throughput: outputs
+                .with("throughput")
+                .await
+                .wrap_err("Failed to create throughput output")?,
+            data,
+        }) as Box<dyn Node>)
+    }
+
+    async fn start(self: Box<Self>) -> Result<()> {
         // test latency first
         for size in SIZES {
-            for _ in 0..20 {
-                let data = data
+            for _ in 0..BENCH_LEN {
+                let data = self
+                    .data
                     .get(&size)
                     .ok_or_eyre(format!("Could not get a `data` according to {}", size))?
                     .clone();
 
-                let image = Image {
-                    metadata: None,
-                    data: UInt8Array::from(data),
-                };
+                #[cfg(feature = "raw")]
+                {
+                    self.latency.send(UInt8Array::from(data))?;
+                }
+                #[cfg(not(feature = "raw"))]
+                {
+                    let image = Image {
+                        metadata: None,
+                        data: UInt8Array::from(data),
+                    };
 
-                self.latency.send(image)?;
+                    self.latency.send(image)?;
+                }
 
                 // sleep a bit to avoid queue buildup
                 tokio::time::sleep(Duration::from_millis(10)).await;
@@ -78,18 +87,26 @@ impl Node for BenchmarkSource {
         tokio::time::sleep(Duration::from_secs(3)).await;
 
         for size in SIZES {
-            for _ in 0..20 {
-                let data = data
+            for _ in 0..BENCH_LEN {
+                let data = self
+                    .data
                     .get(&size)
                     .ok_or_eyre(format!("Could not get a `data` according to {}", size))?
                     .clone();
 
-                let image = Image {
-                    metadata: None,
-                    data: UInt8Array::from(data),
-                };
+                #[cfg(feature = "raw")]
+                {
+                    self.throughput.send(UInt8Array::from(data))?;
+                }
+                #[cfg(not(feature = "raw"))]
+                {
+                    let image = Image {
+                        metadata: None,
+                        data: UInt8Array::from(data),
+                    };
 
-                self.throughput.send(image)?;
+                    self.throughput.send(image)?;
+                }
             }
         }
 

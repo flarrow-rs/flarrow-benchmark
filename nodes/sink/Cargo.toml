@@ -5,6 +5,7 @@ edition = "2024"
 
 [features]
 no-dylib = []
+raw = []
 
 [lib]
 crate-type = ["cdylib", "rlib"]
