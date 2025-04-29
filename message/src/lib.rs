@@ -1,6 +1,4 @@
-use flarrow_message::prelude::*;
-
-use arrow_array::{Array, UInt8Array};
+use flarrow_message::prelude::{thirdparty::arrow_array::*, *};
 
 #[derive(Debug, ArrowMessage)]
 pub struct Metadata {

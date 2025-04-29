@@ -274,24 +274,28 @@ dependencies = [
 
 [[package]]
 name = "flarrow-api"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2951cb08c5032e3e3ad02afa0552ccb2d70810015053d720575f184db3428552"
+checksum = "6b371a6f75b0faa17d63704758fa5a3e734fdbf49df893b630106ce9e8ac8e9f"
 dependencies = [
+ "arrow-array",
+ "arrow-data",
  "eyre",
  "flarrow-api-derive",
  "flarrow-layout",
  "flarrow-message",
  "serde_yml",
  "tokio",
+ "tracing",
  "uhlc",
+ "uuid",
 ]
 
 [[package]]
 name = "flarrow-api-derive"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1b8cb326d1bff2ea86ac7c10aaf80aa35769b4b9fbec9b1764f73e849ddf38b"
+checksum = "8dfa1d7e426bfd25b963d35f0039fe7eef5ddf97b1b32855d91eb9bfbfd2e234"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -302,51 +306,87 @@ dependencies = [
 name = "flarrow-benchmark"
 version = "0.1.0"
 dependencies = [
+ "flarrow-file-ext",
+ "flarrow-flows",
+ "flarrow-layout",
  "flarrow-runtime",
+ "flarrow-url-scheme",
  "sink",
  "source",
- "url",
 ]
 
 [[package]]
 name = "flarrow-builtins"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b103158e2d3f3623d4553697b087b7ee88f4845fe8c7f66912010dd217068b6"
+checksum = "055ed7d9703912da1f5f2560407fba3c7a2ee8552c187c9dc1502ec15e9e5844"
 dependencies = [
  "eyre",
  "flarrow-api",
+ "serde_yml",
  "tokio",
 ]
 
 [[package]]
-name = "flarrow-layout"
-version = "0.2.1"
+name = "flarrow-file-ext"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4319a8cb40ac51d605437b0e8d8cf88d72ee50002dcfd85c7e87b877e840b3e"
+checksum = "6780033f5aed487ae3ca4bf0b0e12db4d7ce9e5814b6f599ecc28439a2e133f0"
 dependencies = [
  "eyre",
+ "flarrow-api",
+ "flarrow-runtime-core",
+ "libloading",
+ "serde_yml",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "flarrow-flows"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93b0e024a04ee13d7c721b6b66e4445bf7049f374909d212002d46bcafdcc5e1"
+dependencies = [
+ "eyre",
+ "flarrow-api",
+ "flarrow-layout",
+ "tokio",
+ "tracing",
+ "uhlc",
+ "uuid",
+]
+
+[[package]]
+name = "flarrow-layout"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "32d5a197346dfa18aff89ca6b6843f20325a7d7d4b8da89177d3fe736d78a405"
+dependencies = [
+ "eyre",
+ "tracing",
  "uuid",
 ]
 
 [[package]]
 name = "flarrow-message"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03f7ba7db0244da71979c73f96430257b750b4774d600f090c7f2c66944ddc45"
+checksum = "791972b3b5c37f595545ab230c06eea0ce8ab11511afb196b988aad2e6e7460c"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
  "arrow-schema",
+ "eyre",
  "flarrow-message-derive",
 ]
 
 [[package]]
 name = "flarrow-message-derive"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c419c1abf1e4d13b18695a3275b2da2943dcfbef233a370380979f92ed1920b2"
+checksum = "a687c625caa0e900baa99211a3615b6fc2f240bfdba2285ebbd43c6e86875b87"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -355,44 +395,51 @@ dependencies = [
 
 [[package]]
 name = "flarrow-runtime"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa6de760e94a105419775344794b782a3f35e4f3956fc87b7fbed553ffa44d29"
+checksum = "202ceb15fe6b16a7eac3cf5ece29b068b4195504dccec31dfe8555c112de1098"
 dependencies = [
  "eyre",
  "flarrow-api",
- "flarrow-url",
- "flarrow-url-default",
- "libloading",
+ "flarrow-builtins",
+ "flarrow-file-ext",
+ "flarrow-flows",
+ "flarrow-layout",
+ "flarrow-runtime-core",
+ "flarrow-url-scheme",
+ "serde_yml",
  "tokio",
+ "tracing",
+ "tracing-subscriber",
  "uhlc",
  "url",
 ]
 
 [[package]]
-name = "flarrow-url"
-version = "0.2.1"
+name = "flarrow-runtime-core"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a6d85aa6487435e863f4c5af8916e1168b8372c011b1f3932f2445f0da506c72"
+checksum = "0d8b60fcb35d6fd5e485edafe6e557cdadf8dee49870b765f2c8a5269de8aa96"
 dependencies = [
  "eyre",
  "flarrow-api",
  "libloading",
- "tokio",
- "url",
 ]
 
 [[package]]
-name = "flarrow-url-default"
-version = "0.2.1"
+name = "flarrow-url-scheme"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae13c2b99c4fdb70157f52b981a9b283df96be1068c88c76ba9ef9f9846e5af2"
+checksum = "0cd1987a739d287c1a8c90e533f15c07d5566359e658a1ac7a313d2aef969bc5"
 dependencies = [
  "eyre",
- "flarrow-builtins",
- "flarrow-url",
+ "flarrow-api",
+ "flarrow-file-ext",
+ "flarrow-runtime-core",
  "libloading",
+ "serde_yml",
  "tokio",
+ "tracing",
  "url",
 ]
 
@@ -756,6 +803,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "nu-ansi-term"
+version = "0.46.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77a8165726e8236064dbb45459242600304b42a5ea24ee2948e18e023bf7ba84"
+dependencies = [
+ "overload",
+ "winapi",
+]
+
+[[package]]
 name = "num"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -843,6 +900,12 @@ name = "once_cell"
 version = "1.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
+
+[[package]]
+name = "overload"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 
 [[package]]
 name = "percent-encoding"
@@ -1003,6 +1066,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sharded-slab"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f40ca3c46823713e0d4209592e8d6e826aa57e928f09752619fc696c499637f6"
+dependencies = [
+ "lazy_static",
+]
+
+[[package]]
 name = "shlex"
 version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1077,6 +1149,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "thread_local"
+version = "1.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b9ef9bad013ada3808854ceac7b46812a6465ba368859a37e2100283d2d719c"
+dependencies = [
+ "cfg-if",
+ "once_cell",
+]
+
+[[package]]
 name = "tiny-keccak"
 version = "2.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1119,6 +1201,63 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "tracing"
+version = "0.1.41"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "784e0ac535deb450455cbfa28a6f0df145ea1bb7ae51b821cf5e7927fdcfbdd0"
+dependencies = [
+ "pin-project-lite",
+ "tracing-attributes",
+ "tracing-core",
+]
+
+[[package]]
+name = "tracing-attributes"
+version = "0.1.28"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "395ae124c09f9e6918a2310af6038fba074bcf474ac352496d5910dd59a2226d"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "tracing-core"
+version = "0.1.33"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e672c95779cf947c5311f83787af4fa8fffd12fb27e4993211a84bdfd9610f9c"
+dependencies = [
+ "once_cell",
+ "valuable",
+]
+
+[[package]]
+name = "tracing-log"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee855f1f400bd0e5c02d150ae5de3840039a3f54b025156404e34c23c03f47c3"
+dependencies = [
+ "log",
+ "once_cell",
+ "tracing-core",
+]
+
+[[package]]
+name = "tracing-subscriber"
+version = "0.3.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e8189decb5ac0fa7bc8b96b7cb9b2701d60d48805aca84a238004d665fcc4008"
+dependencies = [
+ "nu-ansi-term",
+ "sharded-slab",
+ "smallvec",
+ "thread_local",
+ "tracing-core",
+ "tracing-log",
 ]
 
 [[package]]
@@ -1179,6 +1318,12 @@ dependencies = [
  "getrandom 0.3.2",
  "md-5",
 ]
+
+[[package]]
+name = "valuable"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65"
 
 [[package]]
 name = "version_check"
@@ -1258,6 +1403,28 @@ checksum = "1a05d73b933a847d6cccdda8f838a22ff101ad9bf93e33684f39c1f5f0eece3d"
 dependencies = [
  "unicode-ident",
 ]
+
+[[package]]
+name = "winapi"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+dependencies = [
+ "winapi-i686-pc-windows-gnu",
+ "winapi-x86_64-pc-windows-gnu",
+]
+
+[[package]]
+name = "winapi-i686-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+
+[[package]]
+name = "winapi-x86_64-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 
 [[package]]
 name = "windows-core"

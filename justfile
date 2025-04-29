@@ -1,47 +1,36 @@
 static:
-    cargo run --release --bin static --features no-dylib
+    cargo run --release --bin static
 
 dyn:
-    cargo build --release -p sink
-    cargo build --release -p source
+    cargo build --release -p sink --features "cdylib"
+    cargo build --release -p source --features "cdylib"
     cargo run --release --bin dyn
 
 static-dyn:
-    cargo build --release -p sink
-    cargo run --release --bin static_dyn --features source-no-dylib
+    cargo build --release -p sink --features "cdylib"
+    cargo run --release --bin static_dyn
 
 dyn-static:
-    cargo build --release -p source
-    cargo run --release --bin dyn_static --features sink-no-dylib
+    cargo build --release -p source --features "cdylib"
+    cargo run --release --bin dyn_static
 
 raw-static:
-    cargo run --release --bin static --features "no-dylib, raw"
+    cargo run --release --bin static --features "raw"
 
 raw-dyn:
-    cargo build --release -p sink --features "raw"
-    cargo build --release -p source --features "raw"
+    cargo build --release -p sink --features "cdylib,raw"
+    cargo build --release -p source --features "cdylib,raw"
     cargo run --release --bin dyn --features "raw"
 
 raw-static-dyn:
-    cargo build --release -p sink --features "raw"
-    cargo run --release --bin static_dyn --features "source-no-dylib, raw"
+    cargo build --release -p sink --features "cdylib,raw"
+    cargo run --release --bin static_dyn --features "raw"
 
 raw-dyn-static:
-    cargo build --release -p source --features "raw"
-    cargo run --release --bin dyn_static --features "sink-no-dylib, raw"
+    cargo build --release -p source --features "cdylib,raw"
+    cargo run --release --bin dyn_static --features "raw"
 
 draw:
     uv --directory draw run draw
 
-bench:
-    just static
-    just dyn
-    just static-dyn
-    just dyn-static
-    just raw-static
-    just raw-dyn
-    just raw-static-dyn
-    just raw-dyn-static
-    just raw-static-dyn
-    just raw-dyn-static
-    just draw
+bench: static dyn static-dyn dyn-static raw-static raw-dyn raw-static-dyn raw-dyn-static

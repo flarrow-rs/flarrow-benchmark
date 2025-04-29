@@ -1,13 +1,14 @@
 use std::{collections::HashMap, time::Duration};
 
-use arrow_array::UInt8Array;
+use flarrow_api::prelude::{
+    thirdparty::{arrow_array::UInt8Array, *},
+    *,
+};
 
 #[cfg(not(feature = "raw"))]
 use message::Image;
-
-use flarrow_api::prelude::*;
-
 use message::{BENCH_LEN, SIZES};
+
 use rand::{Rng, distr::StandardUniform};
 
 #[derive(Node)]
@@ -27,7 +28,13 @@ pub struct BenchmarkSource {
 
 #[node(runtime = "default_runtime")]
 impl Node for BenchmarkSource {
-    async fn new(_: Inputs, mut outputs: Outputs, _: serde_yml::Value) -> Result<Box<dyn Node>>
+    async fn new(
+        _: Inputs,
+        mut outputs: Outputs,
+        _: Queries,
+        _: Queryables,
+        _: serde_yml::Value,
+    ) -> Result<Self>
     where
         Self: Sized,
     {
@@ -41,7 +48,7 @@ impl Node for BenchmarkSource {
             data.insert(size, vec);
         }
 
-        Ok(Box::new(Self {
+        Ok(Self {
             latency: outputs
                 .with("latency")
                 .await
@@ -51,7 +58,7 @@ impl Node for BenchmarkSource {
                 .await
                 .wrap_err("Failed to create throughput output")?,
             data,
-        }) as Box<dyn Node>)
+        })
     }
 
     async fn start(self: Box<Self>) -> Result<()> {
@@ -66,7 +73,7 @@ impl Node for BenchmarkSource {
 
                 #[cfg(feature = "raw")]
                 {
-                    self.latency.send(UInt8Array::from(data))?;
+                    self.latency.send_async(UInt8Array::from(data)).await?;
                 }
                 #[cfg(not(feature = "raw"))]
                 {
@@ -75,16 +82,16 @@ impl Node for BenchmarkSource {
                         data: UInt8Array::from(data),
                     };
 
-                    self.latency.send(image)?;
+                    self.latency.send_async(image).await?;
                 }
 
                 // sleep a bit to avoid queue buildup
-                tokio::time::sleep(Duration::from_millis(10)).await;
+                tokio::time::sleep(Duration::from_millis(3)).await;
             }
         }
 
         // wait a bit to ensure that all throughput messages reached their target
-        tokio::time::sleep(Duration::from_secs(3)).await;
+        tokio::time::sleep(Duration::from_secs(1)).await;
 
         for size in SIZES {
             for _ in 0..BENCH_LEN {
@@ -96,7 +103,7 @@ impl Node for BenchmarkSource {
 
                 #[cfg(feature = "raw")]
                 {
-                    self.throughput.send(UInt8Array::from(data))?;
+                    self.throughput.send_async(UInt8Array::from(data)).await?;
                 }
                 #[cfg(not(feature = "raw"))]
                 {
@@ -105,9 +112,11 @@ impl Node for BenchmarkSource {
                         data: UInt8Array::from(data),
                     };
 
-                    self.throughput.send(image)?;
+                    self.throughput.send_async(image).await?;
                 }
             }
+
+            tokio::time::sleep(Duration::from_millis(10)).await;
         }
 
         Ok(())
