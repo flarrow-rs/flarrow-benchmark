@@ -60,9 +60,9 @@ def plot_benchmark_results(dataframes):
     ax_latency.set_xlabel("Size (bytes) - Log Scale")
     ax_latency.set_ylabel("Latency (μs)")
 
-    ax_throughput.set_title("Throughput (Gbps) vs Size (Log Scale)")
+    ax_throughput.set_title("Throughput (GBps) vs Size (Log Scale)")
     ax_throughput.set_xlabel("Size (bytes) - Log Scale")
-    ax_throughput.set_ylabel("Throughput (Gbps)")
+    ax_throughput.set_ylabel("Throughput (GBps)")
 
     # # Create a single legend outside the plots
     fig_legend = plt.figure()
