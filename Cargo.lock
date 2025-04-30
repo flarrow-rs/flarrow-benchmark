@@ -25,7 +25,7 @@ checksum = "e89da841a80418a9b391ebaea17f5c112ffaaa96f621d2c285b5174da76b9011"
 dependencies = [
  "cfg-if",
  "const-random",
- "getrandom 0.2.15",
+ "getrandom 0.2.16",
  "once_cell",
  "version_check",
  "zerocopy 0.7.35",
@@ -48,9 +48,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.97"
+version = "1.0.98"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dcfed56ad506cb2c684a14971b8861fdc3baaaae314b9e5f9bb532cbe3ba7a4f"
+checksum = "e16d2d3311acee920a9eb8d33b8cbc1787ce4a264e85f964c2404b969bdcd487"
 
 [[package]]
 name = "arrow-array"
@@ -147,9 +147,9 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "cc"
-version = "1.2.18"
+version = "1.2.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "525046617d8376e3db1deffb079e91cef90a89fc3ca5c185bbf8c9ecdd15cd5c"
+checksum = "04da6a0d40b948dfc4fa8f5bbf402b0fc1a64a28dbf7d12ffd683550f2c1b63a"
 dependencies = [
  "shlex",
 ]
@@ -162,9 +162,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "chrono"
-version = "0.4.40"
+version = "0.4.41"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a7964611d71df112cb1730f2ee67324fcf4d0fc6606acbbe9bfe06df124637c"
+checksum = "c469d952047f47f91b68d1cba3f10d63c11d73e4636f24f08daf0278abf01c4d"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
@@ -187,7 +187,7 @@ version = "0.1.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f9d839f2a20b0aee515dc581a6172f2321f96cab76c1a38a4c584a194955390e"
 dependencies = [
- "getrandom 0.2.15",
+ "getrandom 0.2.16",
  "once_cell",
  "tiny-keccak",
 ]
@@ -274,9 +274,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-api"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b371a6f75b0faa17d63704758fa5a3e734fdbf49df893b630106ce9e8ac8e9f"
+checksum = "bcd4c1c85bd4aed693f012adf95629cc56eedfd6aac42ef5c1398435c712937b"
 dependencies = [
  "arrow-array",
  "arrow-data",
@@ -293,9 +293,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-api-derive"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8dfa1d7e426bfd25b963d35f0039fe7eef5ddf97b1b32855d91eb9bfbfd2e234"
+checksum = "160b5d8f05c6fc86e591b3e65c3d3fcd705a9f41acf0a7a305abf0b9e5a2de1e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -306,20 +306,16 @@ dependencies = [
 name = "flarrow-benchmark"
 version = "0.1.0"
 dependencies = [
- "flarrow-file-ext",
- "flarrow-flows",
- "flarrow-layout",
  "flarrow-runtime",
- "flarrow-url-scheme",
  "sink",
  "source",
 ]
 
 [[package]]
 name = "flarrow-builtins"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "055ed7d9703912da1f5f2560407fba3c7a2ee8552c187c9dc1502ec15e9e5844"
+checksum = "14474e771079d14ce4bd0ce3fa9732af68bcc0578bc2c7a56f31e335612231cb"
 dependencies = [
  "eyre",
  "flarrow-api",
@@ -329,12 +325,13 @@ dependencies = [
 
 [[package]]
 name = "flarrow-file-ext"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6780033f5aed487ae3ca4bf0b0e12db4d7ce9e5814b6f599ecc28439a2e133f0"
+checksum = "bf8125f24afb8e0e93e3c6326c217f5c42dc3a2f0bd2ff7c5e266e0f1b6596c6"
 dependencies = [
  "eyre",
  "flarrow-api",
+ "flarrow-file-ext-derive",
  "flarrow-runtime-core",
  "libloading",
  "serde_yml",
@@ -343,10 +340,21 @@ dependencies = [
 ]
 
 [[package]]
-name = "flarrow-flows"
-version = "0.3.0"
+name = "flarrow-file-ext-derive"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93b0e024a04ee13d7c721b6b66e4445bf7049f374909d212002d46bcafdcc5e1"
+checksum = "358bf0d7918d7e1be8324c498b860ec4c884da441a46bf8dc4d4f134ef7abc90"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "flarrow-flows"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4fe44c43177d770d5429c9a09316734c6c12ba49251182d898dff4465964cc78"
 dependencies = [
  "eyre",
  "flarrow-api",
@@ -359,9 +367,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-layout"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "32d5a197346dfa18aff89ca6b6843f20325a7d7d4b8da89177d3fe736d78a405"
+checksum = "bb651e4d3fe47881f349434d94199bec819393b1909d8c949cb6ca1b7de28936"
 dependencies = [
  "eyre",
  "tracing",
@@ -370,9 +378,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-message"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "791972b3b5c37f595545ab230c06eea0ce8ab11511afb196b988aad2e6e7460c"
+checksum = "8e868caf08abc8f70d982594c610dc891992756bf2ef4520cb6a4e3363c8b259"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -384,9 +392,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-message-derive"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a687c625caa0e900baa99211a3615b6fc2f240bfdba2285ebbd43c6e86875b87"
+checksum = "ab21dad5297fbb8f8e53e31174408db8ad3e097ceb3104c0a1f506ab4598bd49"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -395,9 +403,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-runtime"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "202ceb15fe6b16a7eac3cf5ece29b068b4195504dccec31dfe8555c112de1098"
+checksum = "2ebd0770e70b1076dfe257a804a74a6dc718223a60f845c369bd625fce93a529"
 dependencies = [
  "eyre",
  "flarrow-api",
@@ -407,6 +415,7 @@ dependencies = [
  "flarrow-layout",
  "flarrow-runtime-core",
  "flarrow-url-scheme",
+ "libloading",
  "serde_yml",
  "tokio",
  "tracing",
@@ -417,9 +426,9 @@ dependencies = [
 
 [[package]]
 name = "flarrow-runtime-core"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d8b60fcb35d6fd5e485edafe6e557cdadf8dee49870b765f2c8a5269de8aa96"
+checksum = "3054b5b61f8204747050f6674423f8c21a13cc17d759be0835110d5d6d8f8ef7"
 dependencies = [
  "eyre",
  "flarrow-api",
@@ -428,19 +437,31 @@ dependencies = [
 
 [[package]]
 name = "flarrow-url-scheme"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0cd1987a739d287c1a8c90e533f15c07d5566359e658a1ac7a313d2aef969bc5"
+checksum = "ae280afe8aa3365e7c88b99ff3b97b4cd9563250d33b39b496c332ccfb9608aa"
 dependencies = [
  "eyre",
  "flarrow-api",
  "flarrow-file-ext",
  "flarrow-runtime-core",
+ "flarrow-url-scheme-derive",
  "libloading",
  "serde_yml",
  "tokio",
  "tracing",
  "url",
+]
+
+[[package]]
+name = "flarrow-url-scheme-derive"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6abb543911b67a76d998a5b59694c66db30c611c6be9e01fef9043398713378b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -464,9 +485,9 @@ dependencies = [
 
 [[package]]
 name = "getrandom"
-version = "0.2.15"
+version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c4567c8db10ae91089c99af84c68c38da3ec2f087c3f82960bcdbf3656b6f4d7"
+checksum = "335ff9f135e4384c8150d6f27c6daed433577f86b4750418338c01a1a2528592"
 dependencies = [
  "cfg-if",
  "libc",
@@ -717,9 +738,9 @@ checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
 
 [[package]]
 name = "libc"
-version = "0.2.171"
+version = "0.2.172"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c19937216e9d3aa9956d9bb8dfc0b0c8beb6058fc4f7a4dc4d850edf86a237d6"
+checksum = "d750af042f7ef4f724306de029d18836c26c1765a54a6a3f094cbd23a7267ffa"
 
 [[package]]
 name = "libloading"
@@ -733,9 +754,9 @@ dependencies = [
 
 [[package]]
 name = "libm"
-version = "0.2.11"
+version = "0.2.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8355be11b20d696c8f18f6cc018c4e372165b1fa8126cef092399c9951984ffa"
+checksum = "c9627da5196e5d8ed0b0495e61e518847578da83483c37288316d9b2e03a7f72"
 
 [[package]]
 name = "libyml"
@@ -752,6 +773,16 @@ name = "litemap"
 version = "0.7.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23fb14cb19457329c82206317a5663005a4d404783dc74f4252769b0d5f42856"
+
+[[package]]
+name = "lock_api"
+version = "0.4.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "07af8b9cdd281b7915f413fa73f29ebd5d55d0d3f0155584dade1ff18cea1b17"
+dependencies = [
+ "autocfg",
+ "scopeguard",
+]
 
 [[package]]
 name = "log"
@@ -908,6 +939,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 
 [[package]]
+name = "parking_lot"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1bf18183cf54e8d6059647fc3063646a1801cf30896933ec2311622cc4b9a27"
+dependencies = [
+ "lock_api",
+ "parking_lot_core",
+]
+
+[[package]]
+name = "parking_lot_core"
+version = "0.9.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e401f977ab385c9e4e3ab30627d6f26d00e2c73eef317493c4ec6d468726cf8"
+dependencies = [
+ "cfg-if",
+ "libc",
+ "redox_syscall",
+ "smallvec",
+ "windows-targets",
+]
+
+[[package]]
 name = "percent-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -925,14 +979,14 @@ version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "85eae3c4ed2f50dcfe72643da4befc30deadb458a9b590d720cde2f2b1e97da9"
 dependencies = [
- "zerocopy 0.8.24",
+ "zerocopy 0.8.25",
 ]
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.94"
+version = "1.0.95"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a31971752e70b8b2686d7e46ec17fb38dad4051d94024c88df49b667caea9c84"
+checksum = "02b3e5e68a3a1a02aad3ec490a98007cbc13c37cbe84a3cd7b8e406d76e7f778"
 dependencies = [
  "unicode-ident",
 ]
@@ -965,13 +1019,12 @@ dependencies = [
 
 [[package]]
 name = "rand"
-version = "0.9.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3779b94aeb87e8bd4e834cee3650289ee9e0d5677f976ecdb6d219e5f4f6cd94"
+checksum = "9fbfd9d094a40bf3ae768db9361049ace4c0e04a4fd6b359518bd7b73a73dd97"
 dependencies = [
  "rand_chacha 0.9.0",
  "rand_core 0.9.3",
- "zerocopy 0.8.24",
 ]
 
 [[package]]
@@ -1000,7 +1053,7 @@ version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
 dependencies = [
- "getrandom 0.2.15",
+ "getrandom 0.2.16",
 ]
 
 [[package]]
@@ -1010,6 +1063,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "99d9a13982dcf210057a8a78572b2217b667c3beacbf3a0d8b454f6f82837d38"
 dependencies = [
  "getrandom 0.3.2",
+]
+
+[[package]]
+name = "redox_syscall"
+version = "0.5.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d2f103c6d277498fbceb16e84d317e2a400f160f46904d5f5410848c829511a3"
+dependencies = [
+ "bitflags",
 ]
 
 [[package]]
@@ -1029,6 +1091,12 @@ name = "ryu"
 version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f"
+
+[[package]]
+name = "scopeguard"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
 
 [[package]]
 name = "serde"
@@ -1082,9 +1150,9 @@ checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
 name = "signal-hook-registry"
-version = "1.4.2"
+version = "1.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9e9e0b4211b72e7b8b6e85c807d36c212bdb33ea8587f7569562a84df5465b1"
+checksum = "9203b8055f63a2a00e2f593bb0510367fe707d7ff1e5c872de2f537b339e5410"
 dependencies = [
  "libc",
 ]
@@ -1096,6 +1164,7 @@ dependencies = [
  "csv",
  "flarrow-api",
  "message",
+ "tokio",
  "uhlc",
 ]
 
@@ -1106,12 +1175,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8917285742e9f3e1683f0a9c4e6b57960b7314d0b08d30d1ecd426713ee2eee9"
 
 [[package]]
+name = "socket2"
+version = "0.5.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f5fd57c80058a56cf5c777ab8a126398ece8e442983605d280a44ce79d0edef"
+dependencies = [
+ "libc",
+ "windows-sys",
+]
+
+[[package]]
 name = "source"
 version = "0.1.0"
 dependencies = [
  "flarrow-api",
  "message",
- "rand 0.9.0",
+ "rand 0.9.1",
 ]
 
 [[package]]
@@ -1128,9 +1207,9 @@ checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
 
 [[package]]
 name = "syn"
-version = "2.0.100"
+version = "2.0.101"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b09a44accad81e1ba1cd74a32461ba89dee89095ba17b32f5d03683b1b1fc2a0"
+checksum = "8ce2b7fc941b3a24138a0a7cf8e858bfc6a992e7978a068a5c760deb0ed43caf"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1184,10 +1263,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e6b88822cbe49de4185e3a4cbf8321dd487cf5fe0c5c65695fef6346371e9c48"
 dependencies = [
  "backtrace",
+ "bytes",
  "libc",
  "mio",
+ "parking_lot",
  "pin-project-lite",
  "signal-hook-registry",
+ "socket2",
  "tokio-macros",
  "windows-sys",
 ]
@@ -1614,11 +1696,11 @@ dependencies = [
 
 [[package]]
 name = "zerocopy"
-version = "0.8.24"
+version = "0.8.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2586fea28e186957ef732a5f8b3be2da217d65c5969d4b1e17f973ebbe876879"
+checksum = "a1702d9583232ddb9174e01bb7c15a2ab8fb1bc6f227aa1233858c351a3ba0cb"
 dependencies = [
- "zerocopy-derive 0.8.24",
+ "zerocopy-derive 0.8.25",
 ]
 
 [[package]]
@@ -1634,9 +1716,9 @@ dependencies = [
 
 [[package]]
 name = "zerocopy-derive"
-version = "0.8.24"
+version = "0.8.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a996a8f63c5c4448cd959ac1bab0aaa3306ccfd060472f85943ee0750f0169be"
+checksum = "28a6e20d751156648aa063f3800b706ee209a32c0b4d9f24be3d980b01be55ef"
 dependencies = [
  "proc-macro2",
  "quote",

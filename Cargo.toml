@@ -3,13 +3,9 @@ resolver = "3"
 members = ["message", "nodes/sink", "nodes/source"]
 
 [workspace.dependencies]
-flarrow-flows = "0.3"
-flarrow-layout = "0.3"
 flarrow-api = "0.3"
 flarrow-runtime = "0.3"
 flarrow-message = "0.3"
-flarrow-file-ext = "0.3"
-flarrow-url-scheme = "0.3"
 
 message = { path = "message" }
 
@@ -20,10 +16,6 @@ edition = "2024"
 
 [dependencies]
 flarrow-runtime = { workspace = true }
-flarrow-layout = { workspace = true }
-flarrow-flows = { workspace = true }
-flarrow-file-ext = { workspace = true }
-flarrow-url-scheme = { workspace = true }
 
 sink = { path = "nodes/sink" }
 source = { path = "nodes/source" }

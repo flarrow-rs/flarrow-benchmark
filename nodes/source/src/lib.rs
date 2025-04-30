@@ -73,7 +73,7 @@ impl Node for BenchmarkSource {
 
                 #[cfg(feature = "raw")]
                 {
-                    self.latency.send_async(UInt8Array::from(data)).await?;
+                    self.latency.send(UInt8Array::from(data)).await?;
                 }
                 #[cfg(not(feature = "raw"))]
                 {
@@ -82,7 +82,7 @@ impl Node for BenchmarkSource {
                         data: UInt8Array::from(data),
                     };
 
-                    self.latency.send_async(image).await?;
+                    self.latency.send(image).await?;
                 }
 
                 // sleep a bit to avoid queue buildup
@@ -103,7 +103,7 @@ impl Node for BenchmarkSource {
 
                 #[cfg(feature = "raw")]
                 {
-                    self.throughput.send_async(UInt8Array::from(data)).await?;
+                    self.throughput.send(UInt8Array::from(data)).await?;
                 }
                 #[cfg(not(feature = "raw"))]
                 {
@@ -112,7 +112,7 @@ impl Node for BenchmarkSource {
                         data: UInt8Array::from(data),
                     };
 
-                    self.throughput.send_async(image).await?;
+                    self.throughput.send(image).await?;
                 }
             }
 

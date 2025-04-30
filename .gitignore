@@ -20,8 +20,6 @@ target/
 
 /target
 
-pyrightconfig.json
-
 out/*
 !out/.gitkeep
 

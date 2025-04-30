@@ -5,7 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Enzo Le Van", email = "dev@enzo-le-van.fr" }]
 requires-python = ">=3.13"
-dependencies = ["cutecharts==1.0.0", "pandas>=2.2.3"]
+dependencies = [
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.4",
+    "pandas>=2.2.3",
+    "pyqt6>=6.9.0",
+]
 
 [project.scripts]
 draw = "draw:main"

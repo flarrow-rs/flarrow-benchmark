@@ -1,6 +1,9 @@
 use std::{collections::HashMap, time::Duration};
 
-use flarrow_api::prelude::{thirdparty::*, *};
+use flarrow_api::prelude::{
+    thirdparty::{tokio::io::AsyncWriteExt, *},
+    *,
+};
 
 #[cfg(feature = "raw")]
 use flarrow_api::prelude::thirdparty::arrow_array::UInt8Array;
@@ -130,6 +133,37 @@ impl Node for BenchmarkSink {
                 throughput_gbps,
                 size,
             );
+        }
+
+        let filename = if self.prefix.is_empty() {
+            format!("{}", self.suffix)
+        } else {
+            format!("{}-{}", self.prefix, self.suffix)
+        };
+
+        let mut file = tokio::fs::File::create(format!("out/{}.csv", filename)).await?;
+
+        file.write_all(b"latency_us,throughput_ops,throughput_gbps,size\n")
+            .await?;
+
+        // Écrire les données pour chaque taille
+        for size in SIZES {
+            let avg_latency = latencies_map.get(&size).unwrap_or(&Duration::ZERO);
+            let throughput = throughputs_map
+                .get(&size)
+                .unwrap_or(&Some(0f32))
+                .unwrap_or(0f32);
+            let throughput_gbps = throughput * (size as f32) / 1_000_000_000.0;
+
+            let line = format!(
+                "{:.3},{:.3},{:.6},{}\n",
+                avg_latency.as_micros(),
+                throughput,
+                throughput_gbps,
+                size,
+            );
+
+            file.write_all(line.as_bytes()).await?;
         }
 
         Ok(())

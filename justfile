@@ -33,4 +33,12 @@ raw-dyn-static:
 draw:
     uv --directory draw run draw
 
-bench: static dyn static-dyn dyn-static raw-static raw-dyn raw-static-dyn raw-dyn-static
+bench:  static \
+        raw-static \
+        dyn \
+        static-dyn \
+        dyn-static \
+        raw-dyn \
+        raw-static-dyn \
+        raw-dyn-static \
+        draw
