@@ -70,12 +70,12 @@ def plot_benchmark_results(dataframes):
     fig_legend = plt.figure()
 
     handles, labels = axs[0].get_legend_handles_labels()
-    fig_legend.legend(handles, labels,
+    fig_legend.legend(handles, labels, loc='center',
                       fancybox=True, shadow=True)
 
-    fig_legend.savefig('../bench/benchmark_legend.svg', format='svg', transparent=True)
+    fig_legend.savefig('../bench/benchmark_legend.svg', format='svg')
 
-    fig_legend.savefig('../bench/benchmark_legend.png', format='png', dpi=300, transparent=True)
+    fig_legend.savefig('../bench/benchmark_legend.png', format='png', dpi=300)
 
     # Remove individual legends
     for ax in axs:
