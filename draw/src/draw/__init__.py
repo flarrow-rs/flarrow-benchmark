@@ -36,8 +36,10 @@ def plot_benchmark_results(dataframes):
     if not dataframes:
         return
 
-    # Create a figure with two subplots
-    fig, axs = plt.subplots(1, 2, figsize=(15, 7))  # Increased height a bit for legend
+    fig_latency = plt.figure()
+    ax_latency = fig_latency.add_subplot(111)
+    fig_throughput = plt.figure()
+    ax_throughput = fig_throughput.add_subplot(111)
 
     # Colors for different files
     colors = ['blue', 'red', 'green', 'purple', 'orange', 'brown', 'pink', 'gray', 'olive', 'cyan']
@@ -48,28 +50,24 @@ def plot_benchmark_results(dataframes):
         label_base = filename.replace('.csv', '')
 
         # 1. Latency vs Size Plot
-        axs[0].semilogx(df['size'], df['latency_us'], 'o-', color=color, label=label_base, linewidth=2)
+        ax_latency.semilogx(df['size'], df['latency_us'], 'o-', color=color, label=label_base, linewidth=2)
 
         # 2. Throughput (Gbps) vs Size Plot
-        axs[1].semilogx(df['size'], df['throughput_gbps'], 'o-', color=color, label=label_base, linewidth=2)
+        ax_throughput.semilogx(df['size'], df['throughput_gbps'], 'o-', color=color, label=label_base, linewidth=2)
 
     # Configure titles and labels
-    axs[0].set_title("Latency vs Size (Log Scale)")
-    axs[0].set_xlabel("Size (bytes) - Log Scale")
-    axs[0].set_ylabel("Latency (μs)")
+    ax_latency.set_title("Latency vs Size (Log Scale)")
+    ax_latency.set_xlabel("Size (bytes) - Log Scale")
+    ax_latency.set_ylabel("Latency (μs)")
 
-    axs[1].set_title("Throughput (Gbps) vs Size (Log Scale)")
-    axs[1].set_xlabel("Size (bytes) - Log Scale")
-    axs[1].set_ylabel("Throughput (Gbps)")
-
-    # Set grid for logarithmic scale (looks better in log scale)
-    for ax in axs:
-        ax.grid(True, which="both", linestyle='-', alpha=0.3)
+    ax_throughput.set_title("Throughput (Gbps) vs Size (Log Scale)")
+    ax_throughput.set_xlabel("Size (bytes) - Log Scale")
+    ax_throughput.set_ylabel("Throughput (Gbps)")
 
     # # Create a single legend outside the plots
     fig_legend = plt.figure()
 
-    handles, labels = axs[0].get_legend_handles_labels()
+    handles, labels = ax_latency.get_legend_handles_labels()
     fig_legend.legend(handles, labels, loc='center',
                       fancybox=True, shadow=True)
 
@@ -77,19 +75,23 @@ def plot_benchmark_results(dataframes):
 
     fig_legend.savefig('../bench/benchmark_legend.png', format='png', dpi=300)
 
-    # Remove individual legends
-    for ax in axs:
-        if ax.get_legend():
-            ax.get_legend().remove()
+    if ax_latency.get_legend():
+        ax_latency.get_legend().remove()
+
+    if ax_throughput.get_legend():
+        ax_throughput.get_legend().remove()
 
     # Adjust layout
-    fig.tight_layout()
+    fig_latency.tight_layout()
+    fig_throughput.tight_layout()
 
     # Save as SVG
-    fig.savefig('../bench/benchmark_results.svg', format='svg')
+    fig_latency.savefig('../bench/benchmark_latency.svg', format='svg')
+    fig_latency.savefig('../bench/benchmark_latency.png', format='png', dpi=300)
 
     # Also save as PNG for quick viewing
-    fig.savefig('../bench/benchmark_results.png', format='png', dpi=300)
+    fig_throughput.savefig('../bench/benchmark_throughput.svg', format='svg')
+    fig_throughput.savefig('../bench/benchmark_throughput.png', format='png', dpi=300)
 
 # Main execution
 def main():
