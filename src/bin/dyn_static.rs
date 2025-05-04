@@ -1,4 +1,4 @@
-use flarrow_benchmark::*;
+use iridis_benchmark::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {

@@ -1,4 +1,4 @@
-pub use flarrow_runtime::prelude::{thirdparty::*, *};
+pub use iridis::prelude::{thirdparty::*, *};
 
 pub use sink::BenchmarkSink;
 pub use source::BenchmarkSource;

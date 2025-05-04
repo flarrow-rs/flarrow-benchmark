@@ -15,5 +15,5 @@ csv = "1.3"
 uhlc = { version = "0.8", features = ["std"] }
 tokio = { version = "1", features = ["full"] }
 
-flarrow-api = { workspace = true }
+iridis-api = { workspace = true }
 message = { workspace = true }

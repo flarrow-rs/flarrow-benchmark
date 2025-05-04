@@ -1,6 +1,6 @@
 use std::{collections::HashMap, time::Duration};
 
-use flarrow_api::prelude::{
+use iridis_api::prelude::{
     thirdparty::{arrow_array::UInt8Array, *},
     *,
 };

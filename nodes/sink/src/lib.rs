@@ -1,12 +1,12 @@
 use std::{collections::HashMap, time::Duration};
 
-use flarrow_api::prelude::{
+use iridis_api::prelude::{
     thirdparty::{tokio::io::AsyncWriteExt, *},
     *,
 };
 
 #[cfg(feature = "raw")]
-use flarrow_api::prelude::thirdparty::arrow_array::UInt8Array;
+use iridis_api::prelude::thirdparty::arrow_array::UInt8Array;
 
 #[cfg(not(feature = "raw"))]
 use message::Image;

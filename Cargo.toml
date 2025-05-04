@@ -3,19 +3,19 @@ resolver = "3"
 members = ["message", "nodes/sink", "nodes/source"]
 
 [workspace.dependencies]
-flarrow-api = "0.3"
-flarrow-runtime = "0.3"
-flarrow-message = "0.3"
+iridis-api = "0.3"
+iridis = "0.3"
+iridis-message = "0.3"
 
 message = { path = "message" }
 
 [package]
-name = "flarrow-benchmark"
+name = "iridis-benchmark"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-flarrow-runtime = { workspace = true }
+iridis = { workspace = true }
 
 sink = { path = "nodes/sink" }
 source = { path = "nodes/source" }

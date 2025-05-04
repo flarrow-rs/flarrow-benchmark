@@ -1,4 +1,4 @@
-use flarrow_message::prelude::{thirdparty::arrow_array::*, *};
+use iridis_message::prelude::{thirdparty::arrow_array::*, *};
 
 #[derive(Debug, ArrowMessage)]
 pub struct Metadata {

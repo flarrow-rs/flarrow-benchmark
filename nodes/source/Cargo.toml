@@ -12,5 +12,6 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 rand = "0.9"
-flarrow-api = { workspace = true }
+
+iridis-api = { workspace = true }
 message = { workspace = true }
