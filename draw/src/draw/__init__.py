@@ -53,16 +53,16 @@ def plot_benchmark_results(dataframes):
         ax_latency.semilogx(df['size'], df['latency_us'], 'o-', color=color, label=label_base, linewidth=2)
 
         # 2. Throughput (Gbps) vs Size Plot
-        ax_throughput.semilogx(df['size'], df['throughput_gbps'], 'o-', color=color, label=label_base, linewidth=2)
+        ax_throughput.loglog(df['size'], df['throughput_gbps'] * 1000, 'o-', color=color, label=label_base, linewidth=2)
 
     # Configure titles and labels
     ax_latency.set_title("Latency vs Size (Log Scale)")
     ax_latency.set_xlabel("Size (bytes) - Log Scale")
     ax_latency.set_ylabel("Latency (μs)")
 
-    ax_throughput.set_title("Throughput (GBps) vs Size (Log Scale)")
+    ax_throughput.set_title("Throughput (MBps) vs Size (Log Scale)")
     ax_throughput.set_xlabel("Size (bytes) - Log Scale")
-    ax_throughput.set_ylabel("Throughput (GBps)")
+    ax_throughput.set_ylabel("Throughput (MBps)")
 
     # # Create a single legend outside the plots
     fig_legend = plt.figure()
