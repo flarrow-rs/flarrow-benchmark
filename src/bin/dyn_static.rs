@@ -1,4 +1,7 @@
-use iridis_benchmark::*;
+use iridis_benchmark::prelude::{
+    thirdparty::iridis::prelude::{thirdparty::*, *},
+    *,
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {

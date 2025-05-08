@@ -97,17 +97,21 @@ impl Node for BenchmarkSink {
                 throughputs.push(header.timestamp);
             }
 
-            let avg_duration = match throughputs.last() {
-                Some(last) => match throughputs.first() {
-                    Some(first) => last.get_diff_duration(first),
-                    None => Duration::ZERO,
-                },
-                None => Duration::ZERO,
+            let avg_duration = if throughputs.len() > 1 {
+                let intervals: Vec<Duration> = throughputs
+                    .windows(2)
+                    .map(|pair| pair[1].get_diff_duration(&pair[0]))
+                    .collect();
+
+                let total_duration: Duration = intervals.iter().sum();
+                total_duration / (intervals.len() as u32)
+            } else {
+                Duration::ZERO
             };
 
             let avg_throughput = match avg_duration {
                 Duration::ZERO => None,
-                _ => Some(BENCH_LEN as f32 / avg_duration.as_secs_f32()),
+                _ => Some(1.0 / avg_duration.as_secs_f32()),
             };
 
             throughputs_map.insert(size, avg_throughput);
