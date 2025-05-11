@@ -1,3 +1,3 @@
 # Summary
 
-- [iridis-benchmark](./flarrow-benchmark.md)
+- [iridis-benchmark](./iridis-benchmark.md)
